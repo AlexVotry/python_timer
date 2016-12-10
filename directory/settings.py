@@ -1,3 +1,7 @@
+# username: alex, email: alexvotry@gmail.com, password: kimstimer
+
+# kim: temporary
+
 """
 Django settings for directory project.
 
@@ -31,6 +35,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'my_app',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
