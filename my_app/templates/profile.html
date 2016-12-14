@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <h1>{{ today }}</h1>
+  </div>
+
+  <div class="rows col-xs-12">
+    <span id="timerDisplay" class="col-xs-8"></span>
+  </div>
+        <!-- <span id="currentTimer" class="col-xs-7"></span> -->
+
+        <!-- NEW JOB -->
+        <button type="button" class="col-xs-6 btn btn-lg btn-warning" data-toggle="modal" data-target="#addJob">Add Job</button>
+        <!-- modal for new job -->
+        <div id="addJob" class="modal fade" role="dialog">
+          <div class="modal-dialog job">
+
+            <!-- Modal for add new job content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Enter your job name and (optinal) location:  </h4>
+              </div>
+
+              <form action="post_job/" method="post">
+                <div class="modal-body">
+                  {% csrf_token %}
+                  {{ form.as_p }}
+                </div>
+                <div class="modal-footer">
+                  <button id="addIt" type="submit" class="btn btn-warning"  value="submit">Submit</button>
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+
+        <button type="button" class="col-xs-5 col-xs-offset-1 btn btn-info btn-lg" data-toggle="modal" data-target="#newJob">Change Date</button>
+
+        <!-- Modal for date change-->
+        <div id="newJob" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal date change content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Edit time for a different day:  </h4>
+              </div>
+              <div class="modal-body">
+                <input id="dateInput" type="date">
+              </div>
+              <div class="modal-footer">
+                <button id="changeDate" type="button" class="btn btn-info" data-dismiss="modal">change it! </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div id="jobList" class="col-xs-6">
+          {% for job in jobs %}
+          <button type="button" id="job" class="col-xs-12 btn btn-lg color${id}">{{ job.job }}</button>
+          {% endfor %}
+          </div>
+
+          <div id="editBtn" class="col-xs-6"> </div>
+        </div>
+
+        <div id="jobTimeDisplay" class="col-xs-12">
+          <span class="col-xs-6"><b><i>job</i></b></span>
+          <span class="col-xs-2"><b><i>Hour</i></b></span>
+          <span class="col-xs-2"><b><i>Min.</i></b></span>
+          <span class="col-xs-2"><b><i>Sec.</i></b></span>
+          <!-- inputs for individual times -->
+        </div>
+      </div>
+
+      <div class="container bars">
+        <!-- job progress comparisons -->
+      </div>
+        <div id="jobList" class="col-xs-12">
+          <!-- add job buttons -->
+        </div>
+
+{% endblock %}
